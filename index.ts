@@ -1,4 +1,4 @@
-import { UserInfo } from './src/model/UserInfo'
+import { UserInfo } from "./src/model/userinfo/UserInfo"
 
 /**
  Classe inicial do programa
@@ -11,25 +11,25 @@ export class Start {
      */
     constructor(param: String[]) {
         // Iniciando timer
-        let antes: number = new Date().getTime()
+        const antes: number = new Date().getTime()
         let tamanho: number = this.prepareArgs(param)
 
         // Validando tamanho de entradas
         if (tamanho != -1) {
-            var list: UserInfo[] = new Array()
+            let list: UserInfo[] = []
 
             // Criando UserInfo
             for (let index: number = 0; index < tamanho; index++) {
-                let user: string = "user" + index
-                let password: string = "password" + index
+                const user: string = "user" + index
+                const password: string = "password" + index
                 list.push(new UserInfo(user, password))
             }
 
             // Calculando benchmark
-            let time: number = new Date().getTime() - antes
+            const time: number = new Date().getTime() - antes
 
             // Escrevendo Json
-            let response: string = "[OK]{tamanho: " + tamanho + ", tempo: " + time + "}"
+            const response: string = "[OK]{tamanho: " + tamanho + ", tempo: " + time + "}"
             console.log(response)
         }
     }
@@ -47,7 +47,7 @@ export class Start {
         }
 
         // Obtendo numero de linhas
-        let line: number = Number(codes[2])
+        const line: number = Number(codes[2])
 
         // Validando tamanho de linhas
         if (line <= 0) {
