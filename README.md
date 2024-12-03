@@ -1,24 +1,37 @@
-# Benchmark-Languages
+# bml-Typescript
 
 ### Introdução
 
-O objetivo deste repositório é estudar o comportamento, estrutura e o desempenho de diversas linguagens.
+O objetivo deste repositório é estudar o comportamento, estrutura e o desempenho da linguagem typescript.
 
-Os experimentos deste repositório não possuem os arquivos de build com o objetivo de reduzir o tamanho dos commits.
+Este repositório funciona como um plugin para o repositório princial **Benchmark Languages**.
 
-No momento, as seguintes linguagens de programação estão sendo estudadas simultaneamente:
+Ferramentas utilizadas neste repositório bem como suas versões:
 
-| Linguagem | IDE utilizada | Compilação |
-|-----------|---------------|------------|
-| Java | Intellij (JVM) | [Criação de pacotes com Intellij](https://www.jetbrains.com/help/idea/packaging-a-module-into-a-jar-file.html) |
-| Scala | Intellij (JVM) | [Criação de pacotes com Intellij](https://www.jetbrains.com/help/idea/packaging-a-module-into-a-jar-file.html) |
-| Kotlin | Intellij (JVM) | [Criação de pacotes com Intellij](https://www.jetbrains.com/help/idea/packaging-a-module-into-a-jar-file.html) |
-| R | Visual Studio Code | - |
-| C# | Visual Studio Code | - |
-| Ruby | Visual Studio Code | - |
-| Python3 | Visual Studio Code | - |
-| Typescript | Visual Studio Code | `npm install && npm run build` |
-| Golang | Visual Studio Code | - |
+|Ferramenta |Versão  |
+|-----------|--------|
+|Typescript |^5.0.0  |
+|Bun        |1.1.29  |
+
+### Instalação
+
+1. Clone este repositório com o comando abaixo, onde **<branch>>** se refere ao experimento que deseja realizar:
+
+```
+git clone -b <branch> https://github.com/PedroDrim/bml-typescript
+```
+
+2. Instale o **Bun** pelo comando abaixo:
+
+```
+curl -fsSL https://bun.sh/install | bash
+```
+
+3. Entre no diretório do repositório clonado e execute o arquivo **Bench.sh** passando como parametro a quandidade de instâncias a serem geradas no teste:
+
+```
+./Bench.sh 1000000
+```
 
 ### Experimentos
 
