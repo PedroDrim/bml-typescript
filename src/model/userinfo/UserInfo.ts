@@ -20,7 +20,7 @@ export class UserInfo {
      */
     constructor(user: string, password: string) {
         this.user = user
-        this._password = this.cryptPassword(password)
+        this._password = this._cryptPassword(password)
     }
 
     /**
@@ -28,7 +28,7 @@ export class UserInfo {
      * @return Senha do usuario criptografada
      */
     public getPassword(): string {
-        return this.cryptPassword(this._password)
+        return this._cryptPassword(this._password)
     }
 
     /**
@@ -44,7 +44,7 @@ export class UserInfo {
      * @param password Senha a ser encriptada
      * @return Nova senha encriptada
      */
-    private cryptPassword(password: string): string {
+    private _cryptPassword(password: string): string {
         return password.split("").reverse().join("")
     }
 }
