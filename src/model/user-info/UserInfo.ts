@@ -3,24 +3,25 @@
  */
 export class UserInfo {
 
-    /**
-     * Nome do usuario
-     */
-    public user: string;
+    // Nome do usuario
+    public user: string
+
+    // Credito do usuario
+    public credit: number
+
+    // Senha criptografada do usuario
+    private _password: string
 
     /**
-     * Senha do usuario
-     */
-    private _password: string;
-
-    /**
-     * Construtor público da classe
+     * Construtor publico da classe
      * @param user Nome do usuario
-     * @param password Senha do usuario
+     * @param password Credito do usuario 
+     * @param credit Senha do usuario
      */
-    constructor(user: string, password: string) {
+    constructor(user: string, password: string, credit: number) {
         this.user = user
         this._password = this._cryptPassword(password)
+        this.credit = credit
     }
 
     /**
@@ -42,7 +43,7 @@ export class UserInfo {
     /**
      * Metodo privado para encriptar a senha do usuario
      * @param password Senha a ser encriptada
-     * @return Nova senha encriptada
+     * @returns Nova senha encriptada
      */
     private _cryptPassword(password: string): string {
         return password.split("").reverse().join("")

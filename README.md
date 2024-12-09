@@ -30,7 +30,7 @@ curl -fsSL https://bun.sh/install | bash
 3. Entre no diretório do repositório clonado e execute o arquivo **Bench.sh** passando como parametro a quandidade de instâncias a serem geradas no teste:
 
 ```
-./Bench.sh 1000000
+./Bench.sh ./test.csv
 ```
 
 ### Experimentos
@@ -40,3 +40,4 @@ Esta seção é a mais divertida (na minha opinião), pois nela descrevo os expe
 | Nome (com link) | Objetivo | Técnicas utilizadas para análise |
 |-----------------|----------|----------------------------------|
 | [simpleclass](https://github.com/PedroDrim/Benchmark-Languages/blob/simpleclass/Documents/simpleclass.md) | Estudar a criação de classes simples | Scatterplot de média com desvio padrão e regressão linear simples.|
+| [inputclass](https://github.com/PedroDrim/Benchmark-Languages/blob/master/outputs/inputclass/inputclass.md) | Estudar a leitura de arquivos e interfaces | Análise por média e exibição por Barplot estacado |
