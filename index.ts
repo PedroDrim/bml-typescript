@@ -6,20 +6,28 @@ import { UserInfo } from "./src/model/userinfo/UserInfo"
 export class Start {
 
     /**
+     * Tamanho de dados a serem gerados
+     */
+    private _tamanho: number
+
+    /**
      * Metodo de inicializaao do projeto
      * @param args Lista de parametros obtidos via console
      */
     constructor(param: String[]) {
-        // Iniciando timer
-        const antes: number = new Date().getTime()
-        let tamanho: number = this.prepareArgs(param)
+        this._tamanho = this._prepareArgs(param)
+    }
 
+    public run(): void {
         // Validando tamanho de entradas
-        if (tamanho != -1) {
+        if (this._tamanho != -1) {
+            // Iniciando timer
+            const antes: number = new Date().getTime()
+
             let list: UserInfo[] = []
 
             // Criando UserInfo
-            for (let index: number = 0; index < tamanho; index++) {
+            for (let index: number = 0; index < this._tamanho; index++) {
                 const user: string = "user" + index
                 const password: string = "password" + index
                 list.push(new UserInfo(user, password))
@@ -29,7 +37,7 @@ export class Start {
             const time: number = new Date().getTime() - antes
 
             // Escrevendo Json
-            const response: string = "[OK]{tamanho: " + tamanho + ", tempo: " + time + "}"
+            const response: string = "[OK]{tamanho: " + this._tamanho + ", tempo: " + time + "}"
             console.log(response)
         }
     }
@@ -39,7 +47,7 @@ export class Start {
      * @param codes Lista de parametros obtidos via console
      * @return Tamanho de usuarios a serem gerados
      */
-    private prepareArgs(codes: String[]): number {
+    private _prepareArgs(codes: String[]): number {
         // Verificando tamanho de argumentos
         if (codes.length != 3) {
             console.log("Parametros invalidos.")
@@ -60,4 +68,5 @@ export class Start {
 }
 
 // Iniciando simulacao
-new Start(process.argv)
+const start: Start = new Start(process.argv)
+start.run()
