@@ -1,71 +1,81 @@
-import { Table } from './src/model/table/Table'
-import { UserInfo } from './src/model/user-info/UserInfo';
-import type { SimpleTableAnalysis } from './src/model/simple-table-analysis/SimpleTableAnalysis';
-import { MaxValueAnalysis } from './src/provider/max-value-analysis/MaxValueAnalysis';
-import { MinValueAnalysis } from './src/provider/min-value-analysis/MinValueAnalysis';
-import { MeanAnalysis } from './src/provider/mean-analysis/MeanAnalysis';
+import type { BunFile } from "bun"
+import type { BenchmarkOutput } from "./src/model/benchmark-output/BenchmarkOutput"
+import type { TableAnalysis } from "./src/model/table-analysis/TableAnalysis"
+import { TimeFormat } from "./src/model/time-format/TimeFormat"
+import { UserInfo } from "./src/model/user-info/UserInfo"
+import { BenchmarkMeasure } from "./src/provider/benchmark-measure/BenchmarkMeasure"
+import { BubbleSortAnalysis } from "./src/provider/bubble-sort-analysis/BubbleSortAnalysis"
+import { LanguageSortAnalysis } from "./src/provider/language-sort-analysis/LanguageSortAnalysis"
+import { QuickSortAnalysis } from "./src/provider/quick-sort-analysis/QuickSortAnalysis"
+import { SummaryAnalysis } from "./src/provider/summary-analysis/SummaryAnalysis"
+import { TableReader } from "./src/provider/table-reader/TableReader"
 
 /**
- Classe inicial do programa
+ * Classe de inicio
  */
 export class Start {
 
     /**
-     * Metodo de inicializaao do projeto
-     * @param args Lista de parametros obtidos via console
+     * Arquivo de configuracao
      */
-    public constructor(args: string[]) {
-        // Validando parametros de entrada
-        let fileName: string = this.getParam(args)
+    private _file: BunFile
 
-        // Obtendo o tempo inicial de leitura em milissegundos
-        const leituraAntes: number = new Date().getTime()
-
-        // Convertendo arquivo em lista de "UserInfo"
-        const table: Table = new Table(fileName)
-
-        // Obtendo o tempo final de leitura em milissegundos
-        const leituraDepois: number = new Date().getTime()
-
-        table.userInfoList.then((list: UserInfo[]) => {
-            const maxAnalysis: SimpleTableAnalysis = new MaxValueAnalysis()
-            const minAnalysis: SimpleTableAnalysis = new MinValueAnalysis()
-            const meanAnalysis: SimpleTableAnalysis = new MeanAnalysis()
-    
-            // Obtendo o tempo inicial de analise em milissegundos
-            const analiseAntes: number = new Date().getTime()
-    
-            // Realizando analises
-            const max: number = maxAnalysis.analysis(list)
-            const min: number = minAnalysis.analysis(list)
-            const mean: number = meanAnalysis.analysis(list)
-    
-            // Obtendo o tempo final de analise em milissegundos
-            const analiseDepois: number = new Date().getTime()
-    
-            // Dados de saida
-            let response: string = "[OK]{arquivo: " + fileName +
-                ", tempoLeitura: " + (leituraDepois - leituraAntes) + ", tempoAnalise: " + (analiseDepois - analiseAntes) +
-                ", max: " + max + ", min: " + min + ", mean: " + mean + "}"
-    
-            console.log(response)    
-        })
+    /**
+     * Construtor publico da classe
+     */
+    public constructor() {
+        const configFile = process.argv[2]
+        this._file = Bun.file(configFile)
     }
 
     /**
-     * Método para captura e tratamento dos parametros obtidos via console
-     * @param codes Lista de parametros obtidos via console
-     * @returns Tamanho de usuários á serem gerados
+     * Metodo responsavel por inicializar as analises
      */
-    private getParam(codes: string[]): string {
-        if (codes.length != 3) {
-            console.log("Parametros inválidos.")
-            process.exit(-1)
-        }
+    public async run() {
+        // Lendo configuracoes
+        const properties = await this._file.json()
+        const input: string = properties.INPUT_FILENAME
+        const output: string = properties.OUTPUT_FILENAME
 
-        return (codes[2])
+        let benchmark: BenchmarkOutput = new BenchmarkMeasure()
+
+        // Instanciando analises
+        let summaryAnalysis: TableAnalysis<Array<number>> = new SummaryAnalysis()
+        let bubbleSortAnalysis: TableAnalysis<Array<UserInfo>> = new BubbleSortAnalysis()
+        let quickSortAnalysis: TableAnalysis<Array<UserInfo>> = new QuickSortAnalysis()
+        let languageSortAnalysis: TableAnalysis<Array<UserInfo>> = new LanguageSortAnalysis()
+
+        //==================================================
+        // Leitura dos dados
+        benchmark.start("Read")
+        let tableReader: TableReader = new TableReader(input)
+        const list: UserInfo[] =  await tableReader.readAll()
+        benchmark.end("Read")
+        //==================================================
+        // Analise dos dados (Summary)
+        benchmark.start("SummaryAnalyse")
+        let summary: number[] = summaryAnalysis.analysis(list)
+        benchmark.end("SummaryAnalyse")
+        //==================================================
+        // Analise dos dados (Bubble)
+        benchmark.start("BubbleAnalyse")
+        let bubble: UserInfo[] =  bubbleSortAnalysis.analysis(list)
+        benchmark.end("BubbleAnalyse")
+        //==================================================
+        // Analise dos dados (Quick)
+        benchmark.start("QuickAnalyse")
+        let quick: UserInfo[] =  quickSortAnalysis.analysis(list)
+        benchmark.end("QuickAnalyse")
+        //==================================================
+        // Analise dos dados (Language)
+        benchmark.start("LanguageAnalyse")
+        let lang: UserInfo[] =  languageSortAnalysis.analysis(list)
+        benchmark.end("LanguageAnalyse")        
+        //==================================================
+
+        benchmark.export(output, TimeFormat.MILLISEGUNDOS)
     }
 }
 
-// Iniciando simulacao
-new Start(process.argv);
+const start: Start = new Start()
+start.run()
