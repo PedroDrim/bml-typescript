@@ -11,45 +11,54 @@ import { MeanAnalysis } from './src/provider/mean-analysis/MeanAnalysis';
 export class Start {
 
     /**
+     * Arquivo de dados
+     */
+    private _fileName: string
+
+    /**
      * Metodo de inicializaao do projeto
      * @param args Lista de parametros obtidos via console
      */
     public constructor(args: string[]) {
         // Validando parametros de entrada
-        let fileName: string = this.getParam(args)
+        this._fileName = this.getParam(args)
+    }
 
+    public async run(): Promise<void> {
         // Obtendo o tempo inicial de leitura em milissegundos
         const leituraAntes: number = new Date().getTime()
 
         // Convertendo arquivo em lista de "UserInfo"
-        const table: Table = new Table(fileName)
+        const table: Table = new Table(this._fileName)
 
         // Obtendo o tempo final de leitura em milissegundos
         const leituraDepois: number = new Date().getTime()
 
-        table.userInfoList.then((list: UserInfo[]) => {
-            const maxAnalysis: SimpleTableAnalysis = new MaxValueAnalysis()
-            const minAnalysis: SimpleTableAnalysis = new MinValueAnalysis()
-            const meanAnalysis: SimpleTableAnalysis = new MeanAnalysis()
-    
-            // Obtendo o tempo inicial de analise em milissegundos
-            const analiseAntes: number = new Date().getTime()
-    
-            // Realizando analises
-            const max: number = maxAnalysis.analysis(list)
-            const min: number = minAnalysis.analysis(list)
-            const mean: number = meanAnalysis.analysis(list)
-    
-            // Obtendo o tempo final de analise em milissegundos
-            const analiseDepois: number = new Date().getTime()
-    
-            // Dados de saida
-            let response: string = "[OK]{arquivo: " + fileName +
-                ", tempoLeitura: " + (leituraDepois - leituraAntes) + ", tempoAnalise: " + (analiseDepois - analiseAntes) +
-                ", max: " + max + ", min: " + min + ", mean: " + mean + "}"
-    
-            console.log(response)    
-        })
+        // Obtendo lista de usuarios
+        const list: UserInfo[] = await table.userInfoList
+
+        const maxAnalysis: SimpleTableAnalysis = new MaxValueAnalysis()
+        const minAnalysis: SimpleTableAnalysis = new MinValueAnalysis()
+        const meanAnalysis: SimpleTableAnalysis = new MeanAnalysis()
+
+        // Obtendo o tempo inicial de analise em milissegundos
+        const analiseAntes: number = new Date().getTime()
+
+        // Realizando analises
+        const max: number = maxAnalysis.analysis(list)
+        const min: number = minAnalysis.analysis(list)
+        const mean: number = meanAnalysis.analysis(list)
+
+        // Obtendo o tempo final de analise em milissegundos
+        const analiseDepois: number = new Date().getTime()
+
+        // Dados de saida
+        let response: string = "[OK]{arquivo: " + this._fileName +
+            ", tempoLeitura: " + (leituraDepois - leituraAntes) + ", tempoAnalise: " + (analiseDepois - analiseAntes) +
+            ", max: " + max + ", min: " + min + ", mean: " + mean + "}"
+
+        console.log(response)    
+
     }
 
     /**
@@ -68,4 +77,5 @@ export class Start {
 }
 
 // Iniciando simulacao
-new Start(process.argv);
+const start: Start = new Start(process.argv);
+start.run()
