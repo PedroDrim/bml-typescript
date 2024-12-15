@@ -37,7 +37,7 @@ export class Start {
             const time: number = new Date().getTime() - antes
 
             // Escrevendo Json
-            const response: string = "[OK]{tamanho: " + this._tamanho + ", tempo: " + time + "}"
+            const response: string = "[OK]Tamanho: " + this._tamanho + "\n" + "Tempo: " + time + " ms"
             console.log(response)
         }
     }
