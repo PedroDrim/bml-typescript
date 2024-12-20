@@ -27,7 +27,7 @@ git clone -b <branch> https://github.com/PedroDrim/bml-typescript
 curl -fsSL https://bun.sh/install | bash
 ```
 
-3. Entre no diretório do repositório clonado e execute o arquivo **Bench.sh** passando como parametro a quandidade de instâncias a serem geradas no teste:
+3. Entre no diretório do repositório clonado e execute o arquivo **Bench.sh** passando como parametro o arquivo de configuracao desejado:
 
 ```
 ./Bench.sh ./config.json
