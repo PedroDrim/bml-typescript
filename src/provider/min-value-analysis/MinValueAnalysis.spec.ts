@@ -4,11 +4,11 @@ import type { SimpleTableAnalysis } from "../../model/simple-table-analysis/Simp
 import { MinValueAnalysis } from "./MinValueAnalysis";
 
 describe("MeanAnalysis", () => {
-    test("1. Devera ser inscanciavel'", () => {
+    test("1. Devera ser inscanciavel", () => {
         expect(new MinValueAnalysis()).toBeTruthy()
     });
 
-    test("2. 'analysis()' devera ser valido caso possua parametros validos'", () => {
+    test("2. 'analysis()' devera ser valido caso possua parametros validos", () => {
         const mock: SimpleTableAnalysis = new MinValueAnalysis()
         const list: UserInfo[] = [
             new UserInfo("ua", "pa", 1),

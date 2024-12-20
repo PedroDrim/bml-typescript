@@ -4,11 +4,11 @@ import { UserInfo } from "../../model/user-info/UserInfo";
 import type { SimpleTableAnalysis } from "../../model/simple-table-analysis/SimpleTableAnalysis";
 
 describe("MaxValueAnalysis", () => {
-    test("1. Devera ser inscanciavel'", () => {
+    test("1. Devera ser inscanciavel", () => {
         expect(new MaxValueAnalysis()).toBeTruthy()
     });
 
-    test("2. 'analysis()' devera ser valido caso possua parametros validos'", () => {
+    test("2. 'analysis()' devera ser valido caso possua parametros validos", () => {
         const mock: SimpleTableAnalysis = new MaxValueAnalysis()
         const list: UserInfo[] = [
             new UserInfo("ua", "pa", 1),
