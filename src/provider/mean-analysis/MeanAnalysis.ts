@@ -12,10 +12,7 @@ export class MeanAnalysis implements SimpleTableAnalysis {
      * @returns Media dos valores de credit 
      */
     public analysis(userInfoList: UserInfo[]): number{
-
-        let sum: number = 0.0
-        userInfoList.forEach(userInfo => sum += userInfo.credit )
-
+        const sum: number = userInfoList.reduce((total: number, userInfo: UserInfo) => total + userInfo.credit, 0.0)
         return sum/(userInfoList.length)
     }
 }

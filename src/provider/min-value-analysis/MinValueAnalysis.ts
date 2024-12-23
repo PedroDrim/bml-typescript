@@ -12,8 +12,7 @@ export class MinValueAnalysis implements SimpleTableAnalysis {
      * @returns Valor minimo de credit 
      */
     public analysis(userInfoList: UserInfo[]): number {
-
-        var min: number = Number.MAX_VALUE
+        let min: number = Number.MAX_VALUE
         userInfoList.forEach(userInfo => {
             if (min > userInfo.credit) min = userInfo.credit
         })

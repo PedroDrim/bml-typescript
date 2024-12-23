@@ -1,4 +1,4 @@
-import type { BunFile } from "bun";
+import { sleep, type BunFile } from "bun";
 import { UserInfo } from "../user-info/UserInfo";
 
 /**
@@ -27,7 +27,7 @@ export class Table {
         const fullFile: string = await file.text()
         const lines: string[] = fullFile.split("\n")
 
-        const list: UserInfo[] = lines.filter((line: string) => line != "").map(this._convertToUserInfo)
+        const list: UserInfo[] = lines.slice(1).filter((line: string) => line != "").map(this._convertToUserInfo)
         return list
     }
 

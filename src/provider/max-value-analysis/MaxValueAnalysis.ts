@@ -12,7 +12,6 @@ export class MaxValueAnalysis implements SimpleTableAnalysis {
      * @returns Valor maximo de credit 
      */
     public analysis(userInfoList: UserInfo[]): number{
-
         let max: number = Number.MIN_VALUE;
         userInfoList.forEach(userInfo => {
             if(max < userInfo.credit) max = userInfo.credit

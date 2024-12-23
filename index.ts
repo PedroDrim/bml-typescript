@@ -31,11 +31,11 @@ export class Start {
         // Convertendo arquivo em lista de "UserInfo"
         const table: Table = new Table(this._fileName)
 
-        // Obtendo o tempo final de leitura em milissegundos
-        const leituraDepois: number = new Date().getTime()
-
         // Obtendo lista de usuarios
         const list: UserInfo[] = await table.userInfoList
+
+        // Obtendo o tempo final de leitura em milissegundos
+        const leituraDepois: number = new Date().getTime()
 
         const maxAnalysis: SimpleTableAnalysis = new MaxValueAnalysis()
         const minAnalysis: SimpleTableAnalysis = new MinValueAnalysis()
@@ -53,12 +53,17 @@ export class Start {
         const analiseDepois: number = new Date().getTime()
 
         // Dados de saida
-        let response: string = "[OK]{arquivo: " + this._fileName +
-            ", tempoLeitura: " + (leituraDepois - leituraAntes) + ", tempoAnalise: " + (analiseDepois - analiseAntes) +
-            ", max: " + max + ", min: " + min + ", mean: " + mean + "}"
+        console.log("[START] Typescript_" + this._fileName)
+
+        let response: string = "[OK]Arquivo: " + this._fileName + "\n"
+        response += "[OK]TempoLeitura: " + (leituraDepois - leituraAntes) + " ms \n"
+        response += "[OK]TempoAnalise: " + (analiseDepois - analiseAntes) + " ms \n"
+        response += "[OK]Max: " + max + "\n"
+        response += "[OK]Min: " + min + "\n"
+        response += "[OK]Min: " + mean
 
         console.log(response)    
-
+        console.log("[END] Typescript_" + this._fileName)
     }
 
     /**
