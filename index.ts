@@ -37,8 +37,12 @@ export class Start {
             const time: number = new Date().getTime() - antes
 
             // Escrevendo Json
-            const response: string = "[OK]Tamanho: " + this._tamanho + "\n" + "Tempo: " + time + " ms"
+            let response: string = "[OK]Tamanho: " + this._tamanho + "\n"
+            response += "[OK]Tempo: " + time + " ms"
+            
+            console.log("[START] Typescript_" + this._tamanho)
             console.log(response)
+            console.log("[END] Typescript_" + this._tamanho)
         }
     }
 

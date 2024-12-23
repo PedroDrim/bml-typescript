@@ -1,2 +1,5 @@
 #!/bin/bash
-npm run start $1
+bun start 1000
+bun start 10000
+bun start 100000
+bun start 1000000
