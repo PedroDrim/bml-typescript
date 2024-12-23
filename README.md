@@ -12,6 +12,7 @@ Ferramentas utilizadas neste repositório bem como suas versões:
 |-----------|--------|
 |Typescript |^5.0.0  |
 |Bun        |1.1.29  |
+|Docker     |24.0.7  |
 
 ### Instalação
 
@@ -21,16 +22,26 @@ Ferramentas utilizadas neste repositório bem como suas versões:
 git clone -b <branch> https://github.com/PedroDrim/bml-typescript
 ```
 
-2. Instale o **Bun** pelo comando abaixo:
+2. Instale o [**Docker**](https://docs.docker.com/engine/install/).
+
+3. Entre no diretório do repositório clonado e execute o **Docker** para iniciar as simulaçoes:
 
 ```
-curl -fsSL https://bun.sh/install | bash
+# Gerando build docker
+sudo docker build -t simpleclass_typescript .
+
+# Executando container
+sudo docker run simpleclass_typescript
 ```
 
-3. Entre no diretório do repositório clonado e execute o arquivo **Bench.sh** passando como parametro a quandidade de instâncias a serem geradas no teste:
+4. O resultado sairá no STDOUT no seguinte formato:
 
 ```
-./Bench.sh 1000000
+$ bun index.ts "1000000"
+[START] Typescript_1000000
+[OK]Tamanho: 1000000
+[OK]Tempo: 599 ms
+[END] Typescript_1000000
 ```
 
 ### Experimentos
