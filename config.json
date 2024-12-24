@@ -1,4 +1,7 @@
 {
-    "INPUT_FILENAME_LIST": ["data/data_1000.csv", "data/data_10000.csv", "data/data_100000.csv", "data/data_1000000.csv"],
+    "INPUT_FILENAME_LIST": [
+        "data/data_1e+05.csv", "data/data_2e+05.csv", "data/data_3e+05.csv", "data/data_4e+05.csv", "data/data_5e+05.csv",
+        "data/data_6e+05.csv", "data/data_7e+05.csv", "data/data_8e+05.csv", "data/data_9e+05.csv", "data/data_1e+06.csv"
+    ],
     "OUTPUT_FILENAME": "benchmark.json"
 }
