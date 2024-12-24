@@ -1,4 +1,4 @@
 {
-    "INPUT_FILENAME": "./data/test.csv",
+    "INPUT_FILENAME_LIST": ["data/data_1000.csv", "data/data_10000.csv", "data/data_100000.csv", "data/data_1000000.csv"],
     "OUTPUT_FILENAME": "benchmark.json"
 }

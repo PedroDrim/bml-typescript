@@ -64,7 +64,7 @@ export class TableReader implements DataReader {
         try {
             const file: BunFile = Bun.file(fileName)
             const fullFile: string = await file.text()
-            const lines: string[] = fullFile.replaceAll("\"", "").split("\n")
+            const lines: string[] = fullFile.replaceAll("\"", "").split("\n").slice(1)
             list = lines.filter((line: string) => line != "").map(this.convertLine)
         } catch (e) {
             throw new DataReaderException("Erro ao ler arquivo:" + fileName)

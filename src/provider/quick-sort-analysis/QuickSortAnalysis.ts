@@ -1,6 +1,6 @@
 import { UserInfo } from '../../model/user-info/UserInfo'
 import { InvalidParameterException } from '../../model/exception/invalid-parameter-exception/InvalidParameterException'
-import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis';
+import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis'
 
 /**
  * Classe para ordenacao quickSort
@@ -8,7 +8,7 @@ import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis';
  */
 export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
 
-    private arrayUserInfo: UserInfo[] = []
+    private _arrayUserInfo: UserInfo[] = []
 
     /**
      * Realiza uma analise ordenacao quickSort
@@ -20,11 +20,11 @@ export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
         if (userInfoList.length == 0)
             throw new InvalidParameterException("'userInfoList' é vazio")
 
-        this.arrayUserInfo = userInfoList
+        this._arrayUserInfo = userInfoList
 
-        this.quickSort(0, this.arrayUserInfo.length - 1)
+        this._quickSort(0, this._arrayUserInfo.length - 1)
 
-        return this.arrayUserInfo
+        return this._arrayUserInfo
     }
 
     /**
@@ -32,28 +32,28 @@ export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
      * @param baixo index inicial
      * @param alto index final
      */
-    private quickSort(baixo: number, alto: number): void {
+    private _quickSort(baixo: number, alto: number): void {
         if (baixo > alto) throw new InvalidParameterException("'baixo' é maior que 'alto'")
 
-        var indexInicio: number = baixo
-        var indexFim: number = alto
+        let indexInicio: number = baixo
+        let indexFim: number = alto
 
         // Get the pivot element from the middle of the list
         let index: number = Math.round(baixo + (alto - baixo) / 2)
-        var userInfoPivot: UserInfo = this.arrayUserInfo[index]
-        var aux: UserInfo
+        let userInfoPivot: UserInfo = this._arrayUserInfo[index]
+        let aux: UserInfo
 
         // Divide into two lists
         while (indexInicio <= indexFim) {
             // If the current value from the left list is smaller than the pivot
             // element then get the next element from the left list
-
-            while (this.arrayUserInfo[indexInicio].credit < userInfoPivot.credit) {
+            while (this._arrayUserInfo[indexInicio].credit < userInfoPivot.credit) {
                 indexInicio++
             }
+
             // If the current value from the right list is larger than the pivot
             // element then get the next element from the right list
-            while (this.arrayUserInfo[indexFim].credit > userInfoPivot.credit) {
+            while (this._arrayUserInfo[indexFim].credit > userInfoPivot.credit) {
                 indexFim--
             }
 
@@ -63,9 +63,9 @@ export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
             // values.
             // As we are done we can increase i and j
             if (indexInicio <= indexFim) {
-                aux = this.arrayUserInfo[indexInicio]
-                this.arrayUserInfo[indexInicio] = this.arrayUserInfo[indexFim]
-                this.arrayUserInfo[indexFim] = aux
+                aux = this._arrayUserInfo[indexInicio]
+                this._arrayUserInfo[indexInicio] = this._arrayUserInfo[indexFim]
+                this._arrayUserInfo[indexFim] = aux
 
                 indexInicio++
                 indexFim--
@@ -73,8 +73,8 @@ export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
         }
 
         // Recursion
-        if (baixo < indexFim) this.quickSort(baixo, indexFim)
-        if (indexInicio < alto) this.quickSort(indexInicio, alto)
+        if (baixo < indexFim) this._quickSort(baixo, indexFim)
+        if (indexInicio < alto) this._quickSort(indexInicio, alto)
     }
 
 }

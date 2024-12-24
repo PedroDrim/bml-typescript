@@ -22,7 +22,7 @@ export class BenchmarkMeasure implements BenchmarkOutput {
     /**
      * Mapa de estados
      */
-    private benchMap: Map<string, number>  = new Map()
+    private _benchMap: Map<string, number>  = new Map()
 
     /**
      * Inicio da captura de estado
@@ -30,7 +30,7 @@ export class BenchmarkMeasure implements BenchmarkOutput {
      */
     public start(tag: string): void {
         let time: number = new Date().getTime()
-        this.benchMap.set(tag + this.START_MARK, time)
+        this._benchMap.set(tag + this.START_MARK, time)
     }
 
     /**
@@ -39,7 +39,7 @@ export class BenchmarkMeasure implements BenchmarkOutput {
      */
     public end(tag: string): void {
         let time: number = new Date().getTime()
-        this.benchMap.set(tag + this.END_MARK, time)
+        this._benchMap.set(tag + this.END_MARK, time)
     }
 
     /**
@@ -49,13 +49,13 @@ export class BenchmarkMeasure implements BenchmarkOutput {
      * @return Tempo decorrido entre o inicio e o fim da captura de estado
      */
     public resultByTag(tag: string, format: TimeFormat): number {
-        let startTag: boolean = this.benchMap.has(tag + this.START_MARK)
-        let endTag: boolean = this.benchMap.has(tag + this.END_MARK)
+        let startTag: boolean = this._benchMap.has(tag + this.START_MARK)
+        let endTag: boolean = this._benchMap.has(tag + this.END_MARK)
 
         if (!startTag || !endTag) throw new BenchmarkException("Não encontrado par 'inicio-fim' de:" + tag)
 
-        let start: number = this.benchMap.get(tag + this.START_MARK)!
-        let end: number = this.benchMap.get(tag + this.END_MARK)!
+        let start: number = this._benchMap.get(tag + this.START_MARK)!
+        let end: number = this._benchMap.get(tag + this.END_MARK)!
         return (end - start) * format
     }
 
@@ -67,7 +67,7 @@ export class BenchmarkMeasure implements BenchmarkOutput {
     public result(format: TimeFormat): Map<string, number> {
         var mapResult: Map<string, number> = new Map()
 
-        this.benchMap.forEach((value: number, key: string) => {
+        this._benchMap.forEach((value: number, key: string) => {
             let tag: string = key.split("_")[0]
             let time: number = this.resultByTag(tag, format)
             mapResult.set(tag, time)
