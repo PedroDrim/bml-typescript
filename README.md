@@ -37,15 +37,15 @@ sudo docker run inputclass_typescript
 4. O resultado sairá no STDOUT no seguinte formato:
 
 ```
-$ bun index.ts data/data_1000000.csv
-[START] Typescript_data/data_1000000.csv
-[OK]Arquivo: data/data_1000000.csv
+$ bun index.ts data/data_1e+06.csv
+[START] Typescript_data/data_1e+06.csv
+[OK]Arquivo: data/data_1e+06.csv
 [OK]TempoLeitura: 602 ms 
 [OK]TempoAnalise: 12 ms 
 [OK]Max: 1000000
 [OK]Min: 1
 [OK]Min: 500000.5
-[END] Typescript_data/data_1000000.csv
+[END] Typescript_data/data_1e+06.csv
 ```
 
 ### Garantia de Qualidade
