@@ -16,7 +16,7 @@ Ferramentas utilizadas neste repositório bem como suas versões:
 
 ### Instalação
 
-1. Clone este repositório com o comando abaixo, onde **<branch>** se refere ao experimento que deseja realizar:
+1. Clone este repositório com o comando abaixo, onde **\<branch\>** se refere ao experimento que deseja realizar:
 
 ```
 git clone -b <branch> https://github.com/PedroDrim/bml-typescript
