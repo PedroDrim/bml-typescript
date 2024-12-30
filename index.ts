@@ -54,7 +54,8 @@ export class Start {
             console.log("\t[LOG] Read")
             benchmark.start("Read@" + index)
             let tableReader: TableReader = new TableReader(input)
-            const list: UserInfo[] =  await tableReader.readAll()
+            await tableReader.open()
+            const list: UserInfo[] =  tableReader.readAll()
             benchmark.end("Read@" + index)
             //==================================================
             // Analise dos dados (Summary)
