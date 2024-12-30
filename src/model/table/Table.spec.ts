@@ -3,7 +3,7 @@ import { Table } from "./Table";
 import type { UserInfo } from "../user-info/UserInfo";
 
 describe("Table", () => {
-    test("1. Devera ser inscanciavel caso possua valor valido", () => {
+    test("1. Devera ser instanciavel caso possua valor valido", () => {
         expect(new Table("./data/test.csv")).toBeTruthy()
     });
 
