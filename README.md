@@ -40,7 +40,8 @@ sudo docker run errorclass_typescript
 {
         "Read@0":"2",
         "SummaryAnalysis@0":"0",
-        "BubbleAnalysis@0":"1","QuickAnalysis@0":"1",
+        "BubbleAnalysis@0":"1",
+        "QuickAnalysis@0":"1",
         "LanguageAnalysis@0":"0",
         "Read@1":"11",
         "SummaryAnalysis@1":"0",

@@ -6,10 +6,15 @@ import type { UserInfo } from "../user-info/UserInfo"
 export interface DataReader {
 
     /**
+     * Abre o arquivo de dados
+     */
+    open(): Promise<void>
+
+    /**
      * Obtem todos os dados disponiveis
      * @return Lista contendo todos os dados disponiveis
      */
-    readAll(): Promise<UserInfo[]>
+    readAll(): UserInfo[]
 
     /**
      * Obtem os dados disponiveis dentro de um intervalo
@@ -17,5 +22,5 @@ export interface DataReader {
      * @param endIndex Fim do intervalo
      * @return Lista contendo todos os dados disponiveis dentro do intervalo especificado
      */
-    read(startIndex: number, endIndex: number): Promise<UserInfo[]>
+    read(startIndex: number, endIndex: number): UserInfo[]
 }

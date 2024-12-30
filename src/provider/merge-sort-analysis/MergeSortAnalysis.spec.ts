@@ -16,13 +16,11 @@ describe("MergeSortAnalysis", () => {
         ]
 
         const listOrdered: UserInfo[] = [
-            new UserInfo("u1", "p1", 1),
+            new UserInfo("u3", "p3", 3),
             new UserInfo("u2", "p2", 2),
-            new UserInfo("u3", "p3", 3)
+            new UserInfo("u1", "p1", 1)
         ]
 
-        let a = mock.analysis(listUnordered)
-        console.log(a)
         expect(mock.analysis(listUnordered)).toEqual(listOrdered)
     });
 

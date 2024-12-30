@@ -8,6 +8,7 @@ import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis';
  */
 export class MergeSortAnalysis implements TableAnalysis<UserInfo[]> {
 
+    // Vetor auxiliar interno
     private _arrayUserInfo: UserInfo[] = []
 
     /**
@@ -22,65 +23,85 @@ export class MergeSortAnalysis implements TableAnalysis<UserInfo[]> {
 
         this._arrayUserInfo = userInfoList
 
-        this._mergeSort(0, userInfoList.length - 1)        
+        this._mergeSort(0, userInfoList.length - 1)    
         return this._arrayUserInfo
     }
 
-    private _mergeSort(left: number, right: number) {
-        if (left >= right) return
+    /**
+     * Iniciando mergeSort 
+     * @param esquerda Indice da esquerda
+     * @param direita Indice da direita
+     */
+    private _mergeSort(esquerda: number, direita: number): void {
+        if (esquerda >= direita) return
     
-        const mid = Math.floor(left + (right - left) / 2)
-        this._mergeSort(left, mid)
-        this._mergeSort(mid + 1, right)
-        this._merge(left, mid, right)
+        // Obtendo posicao central
+        const meio = Math.floor(esquerda + (direita - esquerda) / 2)
+
+        // Aplicando recursividade
+        this._mergeSort(esquerda, meio)
+        this._mergeSort(meio + 1, direita)
+
+        // Unificando vetores da esquerda, meio e direita
+        this._merge(esquerda, meio, direita)
     }
 
-    private _merge(left: number, mid: number, right: number) {
-        const n1: number = mid - left + 1
-        const n2: number = right - mid
+    private _merge(esquerda: number, meio: number, right: number): void {
+        // Calculando distancia
+        const distanciaEsquerda: number = meio - esquerda + 1
+        const distanciaDireita: number = right - meio
     
-        // Create temp arrays
-        const L: UserInfo[] = new Array(n1)
-        const R: UserInfo[] = new Array(n2)
+        // Criando vetores temporarios
+        const vetorEsquerda: UserInfo[] = new Array(distanciaEsquerda)
+        const vetorDireita: UserInfo[] = new Array(distanciaDireita)
+
+        // Variavel de indice
+        let index: number = 0
     
-        // Copy data to temp arrays L[] and R[]
-        for (let i = 0; i < n1; i++) {
-            L[i] = this._arrayUserInfo[left + i]
+        // Copiando dados para o vetor da esquerda
+        for (index = 0; index < distanciaEsquerda; index++) {
+            vetorEsquerda[index] = this._arrayUserInfo[esquerda + index]
         }
 
-        for (let j = 0; j < n2; j++) {
-            R[j] = this._arrayUserInfo[mid + 1 + j]
+        // Copiando dados para o vetor da direita
+        for (index = 0; index < distanciaDireita; index++) {
+            vetorDireita[index] = this._arrayUserInfo[meio + 1 + index]
         }
     
-        let i: number = 0
-        let j: number = 0
-        let k: number = left
+        // Iniciando variaveis
+        let indexEsquerda: number = 0
+        let indexDireita: number = 0
+        let initEsquerda: number = esquerda
     
-        // Merge the temp arrays back into arr[left..right]
-        while (i < n1 && j < n2) {
-            if (L[i].credit <= R[j].credit) {
-                this._arrayUserInfo[k] = L[i]
-                i++
+        // Unificando os vetores da esquerda e da direita
+        while (indexEsquerda < distanciaEsquerda && indexDireita < distanciaDireita) {
+
+            // Verificando comparacao
+            if (vetorEsquerda[indexEsquerda].credit > vetorDireita[indexDireita].credit) {
+                // Aplicando esquerda
+                this._arrayUserInfo[initEsquerda] = vetorEsquerda[indexEsquerda]
+                indexEsquerda++
             } else {
-                this._arrayUserInfo[k] = R[j]
-                j++
+                // Aplicando direita
+                this._arrayUserInfo[initEsquerda] = vetorDireita[indexDireita]
+                indexDireita++
             }
 
-            k++
+            initEsquerda++
         }
     
-        // Copy the remaining elements of L[], if there are any
-        while (i < n1) {
-            this._arrayUserInfo[k] = L[i]
-            i++
-            k++
+        // Copiando os elementos restantes da esquerda
+        while (indexEsquerda < distanciaEsquerda) {
+            this._arrayUserInfo[initEsquerda] = vetorEsquerda[indexEsquerda]
+            indexEsquerda++
+            initEsquerda++
         }
     
-        // Copy the remaining elements of R[], if there are any
-        while (j < n2) {
-            this._arrayUserInfo[k] = R[j]
-            j++
-            k++
+        // Copiando os elementos restantes da direita
+        while (indexDireita < distanciaDireita) {
+            this._arrayUserInfo[initEsquerda] = vetorDireita[indexDireita]
+            indexDireita++
+            initEsquerda++
         }
     }
 }

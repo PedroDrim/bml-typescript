@@ -16,9 +16,9 @@ describe("QuickSortAnalysis", () => {
         ]
 
         const listOrdered: UserInfo[] = [
-            new UserInfo("u1", "p1", 1),
+            new UserInfo("u3", "p3", 3),
             new UserInfo("u2", "p2", 2),
-            new UserInfo("u3", "p3", 3)
+            new UserInfo("u1", "p1", 1)
         ]
 
         expect(mock.analysis(listUnordered)).toEqual(listOrdered)

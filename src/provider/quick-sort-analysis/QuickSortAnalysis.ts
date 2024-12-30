@@ -8,6 +8,7 @@ import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis'
  */
 export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
 
+    // Vetor auxiliar interno
     private _arrayUserInfo: UserInfo[] = []
 
     /**
@@ -21,7 +22,6 @@ export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
             throw new InvalidParameterException("'userInfoList' é vazio")
 
         this._arrayUserInfo = userInfoList
-
         this._quickSort(0, this._arrayUserInfo.length - 1)
 
         return this._arrayUserInfo
@@ -35,33 +35,30 @@ export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
     private _quickSort(baixo: number, alto: number): void {
         if (baixo > alto) throw new InvalidParameterException("'baixo' é maior que 'alto'")
 
+        // Obtem os indices de inicio e fim
         let indexInicio: number = baixo
         let indexFim: number = alto
 
-        // Get the pivot element from the middle of the list
-        let index: number = Math.round(baixo + (alto - baixo) / 2)
-        let userInfoPivot: UserInfo = this._arrayUserInfo[index]
+        // Calcula o pivot central
+        const index: number = Math.round(baixo + (alto - baixo) / 2)
+        const userInfoPivot: UserInfo = this._arrayUserInfo[index]
+
+        // Gerando variavel de troca
         let aux: UserInfo
 
-        // Divide into two lists
+        // Calculando troca de posicao
         while (indexInicio <= indexFim) {
-            // If the current value from the left list is smaller than the pivot
-            // element then get the next element from the left list
-            while (this._arrayUserInfo[indexInicio].credit < userInfoPivot.credit) {
+            // Verificando valores que sao maiores que o pivot para mover o limite minimo
+            while (this._arrayUserInfo[indexInicio].credit > userInfoPivot.credit) {
                 indexInicio++
             }
 
-            // If the current value from the right list is larger than the pivot
-            // element then get the next element from the right list
-            while (this._arrayUserInfo[indexFim].credit > userInfoPivot.credit) {
+            // Verificando valores que sao menores que o pivot para mover o limite maximo
+            while (this._arrayUserInfo[indexFim].credit < userInfoPivot.credit) {
                 indexFim--
             }
 
-            // If we have found a value in the left list which is larger than
-            // the pivot element and if we have found a value in the right list
-            // which is smaller than the pivot element then we exchange the
-            // values.
-            // As we are done we can increase i and j
+            // Aplicando troca de valores
             if (indexInicio <= indexFim) {
                 aux = this._arrayUserInfo[indexInicio]
                 this._arrayUserInfo[indexInicio] = this._arrayUserInfo[indexFim]
