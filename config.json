@@ -1,7 +1,7 @@
 {
     "INPUT_FILENAME_LIST": [
-        "data/data_1e+05.csv", "data/data_2e+05.csv", "data/data_3e+05.csv", "data/data_4e+05.csv", "data/data_5e+05.csv",
-        "data/data_6e+05.csv", "data/data_7e+05.csv", "data/data_8e+05.csv", "data/data_9e+05.csv", "data/data_1e+06.csv"
+        "data/data_D1.csv", "data/data_D2.csv", "data/data_D3.csv", "data/data_D4.csv", "data/data_D5.csv",
+        "data/data_D6.csv", "data/data_D7.csv", "data/data_D8.csv", "data/data_D9.csv", "data/data_D10.csv"
     ],
     "OUTPUT_FILENAME": "benchmark.json"
 }
