@@ -10,7 +10,7 @@ COPY ./ /app/
 RUN bun install && bun test
 
 # Descompando arquivos de simulacao
-RUN unzip data/simulationInput.zip -d data
+RUN unzip data/simulationInput_D.zip -d data
 
 # Iniciando CLI
 ENTRYPOINT ["sh","Bench.sh"]
