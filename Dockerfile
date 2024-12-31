@@ -13,7 +13,4 @@ RUN bun install && bun test
 RUN unzip data/simulationInput.zip -d data
 
 # Iniciando CLI
-RUN sh Bench.sh
-
-# Exibindo output
-ENTRYPOINT ["cat", "benchmark.json"]
+ENTRYPOINT ["sh", "Bench.sh"]

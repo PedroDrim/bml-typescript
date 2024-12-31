@@ -8,100 +8,83 @@ import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis';
  */
 export class MergeSortAnalysis implements TableAnalysis<UserInfo[]> {
 
-    // Vetor auxiliar interno
-    private _arrayUserInfo: UserInfo[] = []
-
     /**
      * Realiza uma ordenacao mergeSort
      * @param userInfoList Lista de dados a ser analisada
-     * @return Elemento aleatorio da lista
+     * @return Lista ordenada
      * @see TableAnalysis
      */
     public analysis(userInfoList: UserInfo[]): UserInfo[] {
         if (userInfoList.length == 0)
             throw new InvalidParameterException("'userInfoList' é vazio")
 
-        this._arrayUserInfo = userInfoList
-
-        this._mergeSort(0, userInfoList.length - 1)    
-        return this._arrayUserInfo
+        return this._mergeSort(userInfoList)
     }
 
     /**
      * Iniciando mergeSort 
-     * @param esquerda Indice da esquerda
-     * @param direita Indice da direita
+     * @param array Lista a ser ordenada
+     * @returns Lista ordenada
      */
-    private _mergeSort(esquerda: number, direita: number): void {
-        if (esquerda >= direita) return
+    private _mergeSort(array: UserInfo[]): UserInfo[] {
+        // Limite da recursividade
+        const tamanho: number = array.length
+        if (tamanho <= 1) 
+            return array
     
         // Obtendo posicao central
-        const meio = Math.floor(esquerda + (direita - esquerda) / 2)
+        const meio: number = Math.floor(tamanho / 2)
+
+        // Separando vetores
+        const vetorEsquerda: UserInfo[] = array.slice(0, meio)
+        const vetorDireita: UserInfo[] = array.slice(meio)
 
         // Aplicando recursividade
-        this._mergeSort(esquerda, meio)
-        this._mergeSort(meio + 1, direita)
+        const esquerda: UserInfo[] = this._mergeSort(vetorEsquerda)
+        const direita: UserInfo[] = this._mergeSort(vetorDireita)
 
         // Unificando vetores da esquerda, meio e direita
-        this._merge(esquerda, meio, direita)
+        return this._merge(esquerda, direita)
     }
 
-    private _merge(esquerda: number, meio: number, right: number): void {
-        // Calculando distancia
-        const distanciaEsquerda: number = meio - esquerda + 1
-        const distanciaDireita: number = right - meio
-    
-        // Criando vetores temporarios
-        const vetorEsquerda: UserInfo[] = new Array(distanciaEsquerda)
-        const vetorDireita: UserInfo[] = new Array(distanciaDireita)
-
-        // Variavel de indice
-        let index: number = 0
-    
-        // Copiando dados para o vetor da esquerda
-        for (index = 0; index < distanciaEsquerda; index++) {
-            vetorEsquerda[index] = this._arrayUserInfo[esquerda + index]
-        }
-
-        // Copiando dados para o vetor da direita
-        for (index = 0; index < distanciaDireita; index++) {
-            vetorDireita[index] = this._arrayUserInfo[meio + 1 + index]
-        }
-    
+    /**
+     * Metodo responsvel por unir os vetores
+     * @param esquerda Vetor da esquerda
+     * @param direita Vetor da direita
+     * @returns Lista unificada
+     */
+    private _merge(esquerda: UserInfo[], direita: UserInfo[]): UserInfo[] {
         // Iniciando variaveis
         let indexEsquerda: number = 0
         let indexDireita: number = 0
-        let initEsquerda: number = esquerda
-    
+
+        // Calculando limites
+        const distanciaEsquerda = esquerda.length
+        const distanciaDireita = direita.length
+
+        // Iniciando vetor vazio
+        let response: UserInfo[] = []
+
         // Unificando os vetores da esquerda e da direita
         while (indexEsquerda < distanciaEsquerda && indexDireita < distanciaDireita) {
 
             // Verificando comparacao
-            if (vetorEsquerda[indexEsquerda].credit > vetorDireita[indexDireita].credit) {
+            if (esquerda[indexEsquerda].credit > direita[indexDireita].credit) {
                 // Aplicando esquerda
-                this._arrayUserInfo[initEsquerda] = vetorEsquerda[indexEsquerda]
+                response.push(esquerda[indexEsquerda])
                 indexEsquerda++
             } else {
                 // Aplicando direita
-                this._arrayUserInfo[initEsquerda] = vetorDireita[indexDireita]
+                response.push(direita[indexDireita])
                 indexDireita++
             }
-
-            initEsquerda++
         }
-    
-        // Copiando os elementos restantes da esquerda
-        while (indexEsquerda < distanciaEsquerda) {
-            this._arrayUserInfo[initEsquerda] = vetorEsquerda[indexEsquerda]
-            indexEsquerda++
-            initEsquerda++
-        }
-    
-        // Copiando os elementos restantes da direita
-        while (indexDireita < distanciaDireita) {
-            this._arrayUserInfo[initEsquerda] = vetorDireita[indexDireita]
-            indexDireita++
-            initEsquerda++
-        }
+   
+        // Obtendo vetores de resposta
+        const vetorEsquerda: UserInfo[] = esquerda.slice(indexEsquerda)
+        const vetorDireita: UserInfo[] = direita.slice(indexDireita)
+        
+        // Retornando resposta
+        return response.concat(vetorEsquerda, vetorDireita)
     }
 }

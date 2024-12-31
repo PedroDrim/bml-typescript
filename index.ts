@@ -40,10 +40,10 @@ export class Start {
         let benchmark: BenchmarkOutput = new BenchmarkMeasure()
 
         // Instanciando analises
-        const summaryAnalysis: TableAnalysis<Array<number>> = new SummaryAnalysis()
-        const mergeSortAnalysis: TableAnalysis<Array<UserInfo>> = new MergeSortAnalysis()
-        const quickSortAnalysis: TableAnalysis<Array<UserInfo>> = new QuickSortAnalysis()
-        const languageSortAnalysis: TableAnalysis<Array<UserInfo>> = new LanguageSortAnalysis()
+        const summaryAnalysis: TableAnalysis<number[]> = new SummaryAnalysis()
+        const mergeSortAnalysis: TableAnalysis<UserInfo[]> = new MergeSortAnalysis()
+        const quickSortAnalysis: TableAnalysis<UserInfo[]> = new QuickSortAnalysis()
+        const languageSortAnalysis: TableAnalysis<UserInfo[]> = new LanguageSortAnalysis()
 
         for(let index = 0; index < inputList.length; index++) {
             const input: string = inputList[index]

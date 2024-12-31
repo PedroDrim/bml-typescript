@@ -8,70 +8,44 @@ import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis'
  */
 export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
 
-    // Vetor auxiliar interno
-    private _arrayUserInfo: UserInfo[] = []
-
     /**
      * Realiza uma analise ordenacao quickSort
      * @param userInfoList Lista de dados a ser analisada
-     * @return Elemento aleatorio da lista
+     * @return Lista ordenada
      * @see TableAnalysis
      */
     public analysis(userInfoList: UserInfo[]): UserInfo[] {
         if (userInfoList.length == 0)
             throw new InvalidParameterException("'userInfoList' é vazio")
 
-        this._arrayUserInfo = userInfoList
-        this._quickSort(0, this._arrayUserInfo.length - 1)
-
-        return this._arrayUserInfo
+        return this._quickSort(userInfoList)
     }
 
     /**
      * Iniciando quickSort
-     * @param baixo index inicial
-     * @param alto index final
+     * @param array Lista a ser ordenada
+     * @returns Lista ordenada
      */
-    private _quickSort(baixo: number, alto: number): void {
-        if (baixo > alto) throw new InvalidParameterException("'baixo' é maior que 'alto'")
+    private _quickSort(array: UserInfo[]): UserInfo[] {
+        const tamanho: number = array.length
+        if (tamanho <= 1)
+            return array
 
-        // Obtem os indices de inicio e fim
-        let indexInicio: number = baixo
-        let indexFim: number = alto
+        // Obtendo posicao central
+        const meio: number = Math.floor(tamanho / 2)
+        const pivot: UserInfo = array[meio]
 
-        // Calcula o pivot central
-        const index: number = Math.round(baixo + (alto - baixo) / 2)
-        const userInfoPivot: UserInfo = this._arrayUserInfo[index]
+        // Separando vetores
+        const menores: UserInfo[] = array.filter((value: UserInfo) => value.credit < pivot.credit)
+        const iguais: UserInfo[] = array.filter((value: UserInfo) => value.credit == pivot.credit)
+        const maiores: UserInfo[] = array.filter((value: UserInfo) => value.credit > pivot.credit)
 
-        // Gerando variavel de troca
-        let aux: UserInfo
+        // Obtendo vetores
+        const arrayMenores: UserInfo[] = this._quickSort(menores)
+        const arrayMaiores: UserInfo[] = this._quickSort(maiores)
 
-        // Calculando troca de posicao
-        while (indexInicio <= indexFim) {
-            // Verificando valores que sao maiores que o pivot para mover o limite minimo
-            while (this._arrayUserInfo[indexInicio].credit > userInfoPivot.credit) {
-                indexInicio++
-            }
-
-            // Verificando valores que sao menores que o pivot para mover o limite maximo
-            while (this._arrayUserInfo[indexFim].credit < userInfoPivot.credit) {
-                indexFim--
-            }
-
-            // Aplicando troca de valores
-            if (indexInicio <= indexFim) {
-                aux = this._arrayUserInfo[indexInicio]
-                this._arrayUserInfo[indexInicio] = this._arrayUserInfo[indexFim]
-                this._arrayUserInfo[indexFim] = aux
-
-                indexInicio++
-                indexFim--
-            }
-        }
-
-        // Recursion
-        if (baixo < indexFim) this._quickSort(baixo, indexFim)
-        if (indexInicio < alto) this._quickSort(indexInicio, alto)
+        // Retornando vetor
+        return [...arrayMaiores, ...iguais, ...arrayMenores]
     }
 
 }
