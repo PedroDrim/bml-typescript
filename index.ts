@@ -24,6 +24,9 @@ export class Start {
         this._fileName = this.getParam(args)
     }
 
+    /**
+     * Metodo responsavel por executar as simulacoes
+     */
     public async run(): Promise<void> {
         // Obtendo o tempo inicial de leitura em milissegundos
         const leituraAntes: number = new Date().getTime()
