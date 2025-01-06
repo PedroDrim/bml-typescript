@@ -18,6 +18,9 @@ export class Start {
         this._tamanho = this._prepareArgs(param)
     }
 
+    /**
+     * Metodo responsavel por executar a simulacao
+     */
     public run(): void {
         // Validando tamanho de entradas
         if (this._tamanho != -1) {
