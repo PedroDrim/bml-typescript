@@ -1,4 +1,4 @@
-import { UserInfo } from "./src/model/userinfo/UserInfo"
+import { UserInfo } from "./src/model/userinfo/Userinfo"
 
 /**
  Classe inicial do programa
