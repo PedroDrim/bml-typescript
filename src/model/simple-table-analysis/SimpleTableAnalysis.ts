@@ -1,4 +1,4 @@
-import { UserInfo } from '../user-info/UserInfo'
+import { UserInfo } from '../user-info/Userinfo'
 
 /**
  * Interface para analise de uma lista de usuarios

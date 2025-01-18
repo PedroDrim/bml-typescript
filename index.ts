@@ -1,5 +1,5 @@
 import { Table } from './src/model/table/Table'
-import { UserInfo } from './src/model/user-info/UserInfo';
+import { UserInfo } from './src/model/user-info/Userinfo';
 import type { SimpleTableAnalysis } from './src/model/simple-table-analysis/SimpleTableAnalysis';
 import { MaxValueAnalysis } from './src/provider/max-value-analysis/MaxValueAnalysis';
 import { MinValueAnalysis } from './src/provider/min-value-analysis/MinValueAnalysis';

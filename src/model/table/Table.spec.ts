@@ -1,6 +1,6 @@
 import { expect, test, describe } from "bun:test";
 import { Table } from "./Table";
-import type { UserInfo } from "../user-info/UserInfo";
+import type { UserInfo } from "../user-info/Userinfo";
 
 describe("Table", () => {
     test("1. Devera ser instanciavel caso possua valor valido", () => {

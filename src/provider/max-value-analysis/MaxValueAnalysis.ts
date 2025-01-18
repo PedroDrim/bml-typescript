@@ -1,5 +1,5 @@
 import type { SimpleTableAnalysis } from "../../model/simple-table-analysis/SimpleTableAnalysis";
-import type { UserInfo } from "../../model/user-info/UserInfo";
+import type { UserInfo } from "../../model/user-info/Userinfo";
 
 /**
  * Classe de analise que implementa a interface "SimpleTableAnalysis"

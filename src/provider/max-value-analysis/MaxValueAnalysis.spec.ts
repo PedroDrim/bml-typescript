@@ -1,6 +1,6 @@
 import { expect, test, describe } from "bun:test";
 import { MaxValueAnalysis } from "./MaxValueAnalysis";
-import { UserInfo } from "../../model/user-info/UserInfo";
+import { UserInfo } from "../../model/user-info/Userinfo";
 import type { SimpleTableAnalysis } from "../../model/simple-table-analysis/SimpleTableAnalysis";
 
 describe("MaxValueAnalysis", () => {

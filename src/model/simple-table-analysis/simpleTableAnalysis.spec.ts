@@ -1,6 +1,6 @@
 import { expect, test, describe } from "bun:test";
 import type { SimpleTableAnalysis } from "./SimpleTableAnalysis";
-import type { UserInfo } from "../user-info/UserInfo";
+import type { UserInfo } from "../user-info/Userinfo";
 
 class MockSimpleTableAnalysis implements SimpleTableAnalysis {
     public analysis(userInfoList: UserInfo[]): number {

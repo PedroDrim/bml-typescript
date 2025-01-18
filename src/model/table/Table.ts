@@ -1,5 +1,5 @@
 import { sleep, type BunFile } from "bun";
-import { UserInfo } from "../user-info/UserInfo";
+import { UserInfo } from "../user-info/Userinfo";
 
 /**
  * Classe para gerenciar uma tabela de usuarios

@@ -1,5 +1,5 @@
 import { expect, test, describe } from "bun:test";
-import { UserInfo } from "../../model/user-info/UserInfo";
+import { UserInfo } from "../../model/user-info/Userinfo";
 import type { SimpleTableAnalysis } from "../../model/simple-table-analysis/SimpleTableAnalysis";
 import { MinValueAnalysis } from "./MinValueAnalysis";
 
