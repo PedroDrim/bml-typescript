@@ -1,4 +1,4 @@
-import { UserInfo } from "../../model/user-info/UserInfo";
+import { UserInfo } from "../../model/user-info/Userinfo";
 import { InvalidParameterException } from '../../model/exception/invalid-parameter-exception/InvalidParameterException'
 import { DataReaderException } from '../../model/exception/data-reader-exception/DataReaderException'
 import type { DataReader } from "../../model/data-reader/DataReader";

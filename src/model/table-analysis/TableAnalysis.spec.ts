@@ -1,6 +1,6 @@
 import { expect, test, describe } from "bun:test";
 import type { TableAnalysis } from "./TableAnalysis";
-import type { UserInfo } from "../user-info/UserInfo";
+import type { UserInfo } from "../user-info/Userinfo";
 
 class MockTableAnalysis implements TableAnalysis<number> {
     public analysis(userInfoList: UserInfo[]): number {

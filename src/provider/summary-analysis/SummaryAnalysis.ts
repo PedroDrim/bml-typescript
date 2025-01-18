@@ -1,6 +1,6 @@
 import { InvalidParameterException } from '../../model/exception/invalid-parameter-exception/InvalidParameterException'
 import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis'
-import { UserInfo } from '../../model/user-info/UserInfo'
+import { UserInfo } from '../../model/user-info/Userinfo'
 
 /**
  * Classe para analise de dados, obtem os valores maximo e minimo dos creditos dos usuarios

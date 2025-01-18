@@ -1,4 +1,4 @@
-import { UserInfo } from '../../model/user-info/UserInfo'
+import { UserInfo } from '../../model/user-info/Userinfo'
 import { InvalidParameterException } from '../../model/exception/invalid-parameter-exception/InvalidParameterException'
 import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis';
 

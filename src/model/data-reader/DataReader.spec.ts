@@ -1,6 +1,6 @@
 import { expect, test, describe } from "bun:test";
 import type { DataReader } from "./DataReader";
-import type { UserInfo } from "../user-info/UserInfo";
+import type { UserInfo } from "../user-info/Userinfo";
 
 class MockDataReader implements DataReader {
     public async readAll(): Promise<UserInfo[]> {

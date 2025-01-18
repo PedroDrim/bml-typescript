@@ -1,5 +1,5 @@
 import { expect, test, describe } from "bun:test";
-import { UserInfo } from "./UserInfo";
+import { UserInfo } from "./Userinfo";
 
 describe("UserInfo", () => {
     test("1. Devera ser instanciavel corretamente", () => {
