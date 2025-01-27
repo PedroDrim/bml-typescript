@@ -63,7 +63,7 @@ export class Start {
         response += "[OK]TempoAnalise: " + (analiseDepois - analiseAntes) + " ms \n"
         response += "[OK]Max: " + max + "\n"
         response += "[OK]Min: " + min + "\n"
-        response += "[OK]Min: " + mean
+        response += "[OK]Mean: " + mean
 
         console.log(response)    
         console.log("[END] Typescript_" + this._fileName)
