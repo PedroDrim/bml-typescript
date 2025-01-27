@@ -44,7 +44,7 @@ $ bun index.ts data/data_D10.csv
 [OK]TempoAnalise: 12 ms 
 [OK]Max: 1000000
 [OK]Min: 1
-[OK]Min: 500000.5
+[OK]Mean: 500000.5
 [END] Typescript_data/data_D10.csv
 ```
 
