@@ -15,10 +15,10 @@ name: Codacy Security Scan
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "errorclass", "inputclass", "simpleclass" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "main" ]
+    branches: [ "main", "errorclass", "inputclass", "simpleclass" ]
   schedule:
     - cron: '36 13 * * 3'
 
