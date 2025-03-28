@@ -1,8 +1,8 @@
 # bml-Typescript
 
-[![Docker Build](https://github.com/PedroDrim/bml-typescript/actions/workflows/bun.yml/badge.svg)](https://github.com/PedroDrim/bml-typescript/actions)
-[![Codeql Security](https://github.com/PedroDrim/bml-typescript/actions/workflows/codeql.yml/badge.svg)](https://github.com/PedroDrim/bml-typescript/actions)
-[![Codacy](https://github.com/PedroDrim/bml-typescript/actions/workflows/codacy.yml/badge.svg)](https://github.com/PedroDrim/bml-typescript/actions)
+[![Docker Build](https://github.com/PedroDrim/bml-typescript/actions/workflows/bun.yml/badge.svg?branch=simpleclass)](https://github.com/PedroDrim/bml-typescript/actions)
+[![CodeQL Security](https://github.com/PedroDrim/bml-typescript/actions/workflows/codeql.yml/badge.svg?branch=simpleclass)](https://github.com/PedroDrim/bml-typescript/actions)
+[![Codacy](https://github.com/PedroDrim/bml-typescript/actions/workflows/codacy.yml/badge.svg?branch=simpleclass)](https://github.com/PedroDrim/bml-typescript/actions)
 
 ### Introdução
 
