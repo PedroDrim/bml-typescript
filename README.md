@@ -1,5 +1,9 @@
 # bml-Typescript
 
+[![Docker Build](https://github.com/PedroDrim/bml-typescript/actions/workflows/bun.yml/badge.svg)](https://github.com/PedroDrim/bml-typescript/actions)
+[![Codeql Security](https://github.com/PedroDrim/bml-typescript/actions/workflows/codeql.yml/badge.svg)](https://github.com/PedroDrim/bml-typescript/actions)
+[![Codacy](https://github.com/PedroDrim/bml-typescript/actions/workflows/codacy.yml/badge.svg)](https://github.com/PedroDrim/bml-typescript/actions)
+
 ### Introdução
 
 O objetivo deste repositório é estudar o comportamento, estrutura e o desempenho da linguagem typescript.
