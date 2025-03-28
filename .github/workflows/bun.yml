@@ -1,0 +1,31 @@
+name: Run TypeScript with Bun
+
+on:
+  push:
+    branches: [ "main", "errorclass", "inputclass", "simpleclass" ]
+
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "main", "errorclass", "inputclass", "simpleclass" ]
+
+  workflow_dispatch:
+
+jobs:
+  run-bun:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar o Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Instalar dependências
+        run: bun install
+
+      - name: Rodar o código
+        run: sh Bench.sh  # Altere para o caminho do seu arquivo principal
+
