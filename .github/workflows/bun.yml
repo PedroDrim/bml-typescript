@@ -1,4 +1,4 @@
-name: Run TypeScript with Bun
+name: Run Docker
 
 on:
   push:
@@ -18,14 +18,9 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Instalar o Bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - name: Build da imagem Docker
+        run: docker build -t my-app .
 
-      - name: Instalar dependências
-        run: bun install
-
-      - name: Rodar o código
-        run: sh Bench.sh  # Altere para o caminho do seu arquivo principal
+      - name: Rodar o container
+        run: docker run --rm my-app
 
