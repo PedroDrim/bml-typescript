@@ -1,0 +1,26 @@
+name: Run TypeScript with Bun
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-bun:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar o Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Instalar dependências
+        run: bun install
+
+      - name: Rodar o código
+        run: bun run src/index.ts  # Altere para o caminho do seu arquivo principal
