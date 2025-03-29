@@ -31,7 +31,7 @@ jobs:
         run: bun test --coverage
 
       - name: Upload da cobertura de testes
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: cobertura-de-testes
           path: coverage/
