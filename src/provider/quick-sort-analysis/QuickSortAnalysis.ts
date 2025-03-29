@@ -1,6 +1,6 @@
-import { UserInfo } from '../../model/user-info/UserInfo'
+import { UserInfo } from '../../model/user-info/Userinfo'
 import { InvalidParameterException } from '../../model/exception/invalid-parameter-exception/InvalidParameterException'
-import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis';
+import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis'
 
 /**
  * Classe para ordenacao quickSort
@@ -8,73 +8,44 @@ import type { TableAnalysis } from '../../model/table-analysis/TableAnalysis';
  */
 export class QuickSortAnalysis implements TableAnalysis<UserInfo[]> {
 
-    private arrayUserInfo: UserInfo[] = []
-
     /**
      * Realiza uma analise ordenacao quickSort
      * @param userInfoList Lista de dados a ser analisada
-     * @return Elemento aleatorio da lista
+     * @return Lista ordenada
      * @see TableAnalysis
      */
     public analysis(userInfoList: UserInfo[]): UserInfo[] {
         if (userInfoList.length == 0)
             throw new InvalidParameterException("'userInfoList' é vazio")
 
-        this.arrayUserInfo = userInfoList
-
-        this.quickSort(0, this.arrayUserInfo.length - 1)
-
-        return this.arrayUserInfo
+        return this._quickSort(userInfoList)
     }
 
     /**
      * Iniciando quickSort
-     * @param baixo index inicial
-     * @param alto index final
+     * @param array Lista a ser ordenada
+     * @returns Lista ordenada
      */
-    private quickSort(baixo: number, alto: number): void {
-        if (baixo > alto) throw new InvalidParameterException("'baixo' é maior que 'alto'")
+    private _quickSort(array: UserInfo[]): UserInfo[] {
+        const tamanho: number = array.length
+        if (tamanho <= 1)
+            return array
 
-        var indexInicio: number = baixo
-        var indexFim: number = alto
+        // Obtendo posicao central
+        const meio: number = Math.floor(tamanho / 2)
+        const pivot: UserInfo = array[meio]
 
-        // Get the pivot element from the middle of the list
-        let index: number = Math.round(baixo + (alto - baixo) / 2)
-        var userInfoPivot: UserInfo = this.arrayUserInfo[index]
-        var aux: UserInfo
+        // Separando vetores
+        const menores: UserInfo[] = array.filter((value: UserInfo) => value.credit < pivot.credit)
+        const iguais: UserInfo[] = array.filter((value: UserInfo) => value.credit == pivot.credit)
+        const maiores: UserInfo[] = array.filter((value: UserInfo) => value.credit > pivot.credit)
 
-        // Divide into two lists
-        while (indexInicio <= indexFim) {
-            // If the current value from the left list is smaller than the pivot
-            // element then get the next element from the left list
+        // Obtendo vetores
+        const arrayMenores: UserInfo[] = this._quickSort(menores)
+        const arrayMaiores: UserInfo[] = this._quickSort(maiores)
 
-            while (this.arrayUserInfo[indexInicio].credit < userInfoPivot.credit) {
-                indexInicio++
-            }
-            // If the current value from the right list is larger than the pivot
-            // element then get the next element from the right list
-            while (this.arrayUserInfo[indexFim].credit > userInfoPivot.credit) {
-                indexFim--
-            }
-
-            // If we have found a value in the left list which is larger than
-            // the pivot element and if we have found a value in the right list
-            // which is smaller than the pivot element then we exchange the
-            // values.
-            // As we are done we can increase i and j
-            if (indexInicio <= indexFim) {
-                aux = this.arrayUserInfo[indexInicio]
-                this.arrayUserInfo[indexInicio] = this.arrayUserInfo[indexFim]
-                this.arrayUserInfo[indexFim] = aux
-
-                indexInicio++
-                indexFim--
-            }
-        }
-
-        // Recursion
-        if (baixo < indexFim) this.quickSort(baixo, indexFim)
-        if (indexInicio < alto) this.quickSort(indexInicio, alto)
+        // Retornando vetor
+        return [...arrayMaiores, ...iguais, ...arrayMenores]
     }
 
 }

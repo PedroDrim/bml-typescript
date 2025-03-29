@@ -1,4 +1,4 @@
-import type { UserInfo } from "../user-info/UserInfo"
+import type { UserInfo } from "../user-info/Userinfo"
 
 /**
  * Interface para analise dos dados

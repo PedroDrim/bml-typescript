@@ -1,6 +1,6 @@
 import { expect, test, describe } from "bun:test";
 import { SummaryAnalysis } from "./SummaryAnalysis";
-import { UserInfo } from "../../model/user-info/UserInfo";
+import { UserInfo } from "../../model/user-info/Userinfo";
 
 describe("SummaryAnalysis", () => {
     test("1. Devera ser inscanciavel caso possua valor valido", () => {

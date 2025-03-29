@@ -1,4 +1,4 @@
-import { UserInfo } from "../../model/user-info/UserInfo";
+import { UserInfo } from "../../model/user-info/Userinfo";
 import { InvalidParameterException } from '../../model/exception/invalid-parameter-exception/InvalidParameterException'
 import { DataReaderException } from '../../model/exception/data-reader-exception/DataReaderException'
 import type { DataReader } from "../../model/data-reader/DataReader";
@@ -18,7 +18,7 @@ export class TableReader implements DataReader {
     /**
      * Lista contendo os dados
      */
-    private userInfoList: Promise<UserInfo[]>
+    private userInfoList: UserInfo[]
 
     /**
      * Construtor publico da classe
@@ -27,14 +27,21 @@ export class TableReader implements DataReader {
      */
     constructor(fileName: string) {
         this.fileName = fileName
-        this.userInfoList = this.deserializeFile(this.fileName)
+        this.userInfoList = []
+    }
+
+    /**
+     * Abre o arquivo de dados
+     */
+    public async open(): Promise<void> {
+        this.userInfoList = await this._deserializeFile(this.fileName)
     }
 
     /**
      * Obtem todos os dados disponiveis
      * @returns Lista de usuarios
      */
-    public async readAll(): Promise<UserInfo[]> {
+    public readAll(): UserInfo[] {
         return this.userInfoList
     }
 
@@ -44,12 +51,12 @@ export class TableReader implements DataReader {
      * @param endIndex Fim do intervalo
      * @return Lista contendo todos os dados disponiveis dentro do intervalo especificado
      */
-    public async read(startIndex: number, endIndex: number): Promise<UserInfo[]> {
+    public read(startIndex: number, endIndex: number): UserInfo[] {
         if (startIndex < 0) throw new InvalidParameterException("'startIndex' é menor que 0")
         if (endIndex < 0) throw new InvalidParameterException("'endIndex' é menor que 0")
         if (startIndex >= endIndex) throw new InvalidParameterException("'startIndex' é maior ou igual á 'endIndex'")
 
-        return (await this.userInfoList).slice(startIndex, endIndex)
+        return this.userInfoList.slice(startIndex, endIndex)
     }
 
     /**
@@ -58,13 +65,13 @@ export class TableReader implements DataReader {
      * @return Lista contendo os dados desserilizados
      * @throws DataReaderException Lancada caso nao seja possivel ler os dados corretamente
      */
-    private async deserializeFile(fileName: string): Promise<UserInfo[]> {
+    private async _deserializeFile(fileName: string): Promise<UserInfo[]> {
         let list: UserInfo[] = []
 
         try {
             const file: BunFile = Bun.file(fileName)
             const fullFile: string = await file.text()
-            const lines: string[] = fullFile.replaceAll("\"", "").split("\n")
+            const lines: string[] = fullFile.replaceAll("\"", "").split("\n").slice(1)
             list = lines.filter((line: string) => line != "").map(this.convertLine)
         } catch (e) {
             throw new DataReaderException("Erro ao ler arquivo:" + fileName)
