@@ -1,4 +1,4 @@
-name: Run Docker with Tests (Bun)
+name: Run Docker with Tests (Bun + Node)
 
 on:
   push:
@@ -9,14 +9,14 @@ on:
 
 jobs:
   test:
-    name: Run Tests with Bun
+    name: 🧪 Run Tests with Bun
     runs-on: ubuntu-latest
 
     steps:
       - name: 🚗 Checkout do código
         uses: actions/checkout@v4
 
-      - name: 🍞 Instalar Bun
+      - name: 🏗️ Instalar Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
@@ -24,11 +24,15 @@ jobs:
       - name: 📦 Instalar dependências
         run: bun install
 
-      - name: 🧪 Executar testes
-        run: bun test
+      - name: 🌍 Instalar `nyc` globalmente
+        run: npm install -g nyc
 
-      - name: 📊 Gerar relatório de cobertura
-        run: bun test --coverage
+      - name: 🛠️ Configurar `nyc`
+        run: |
+          echo '{ "extends": "@istanbuljs/nyc-config-typescript" }' > .nycrc
+
+      - name: 📊 Executar testes com cobertura
+        run: nyc --reporter=lcov bun test
 
       - name: 📤 Upload da cobertura de testes
         uses: actions/upload-artifact@v4
