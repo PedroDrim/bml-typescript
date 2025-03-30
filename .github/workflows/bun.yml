@@ -27,10 +27,6 @@ jobs:
       - name: 🌍 Instalar `nyc` globalmente
         run: npm install -g nyc
 
-      - name: 🛠️ Configurar `nyc`
-        run: |
-          echo '{ "extends": "@istanbuljs/nyc-config-typescript" }' > .nycrc
-
       - name: 📊 Executar testes com cobertura
         run: nyc --reporter=lcov bun test
 
