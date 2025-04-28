@@ -7,7 +7,7 @@ describe("TableReader", () => {
     });
 
     test("2. 'open()' devera retornar valor valido caso arquivo seja valido", () => {
-        const mock: TableReader = new TableReader("./data/fake.csv")
+        const mock: TableReader = new TableReader("./data/test.csv")
         expect(async () => {await mock.open()}).toBeTruthy()
     });
 
