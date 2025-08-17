@@ -23,8 +23,7 @@ export class Start {
      */
     public run(): void {
         // Validando tamanho de entradas
-        if (this._tamanho == -1) 
-            return
+        if (this._tamanho == -1) process.exit(this._tamanho)
         
         // Iniciando timer
         const antes: number = new Date().getTime()
