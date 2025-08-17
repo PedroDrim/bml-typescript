@@ -1,0 +1,8 @@
+# Definindo servicos
+services:
+  # Container de benchmark
+  benchmark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bun_benchmark
