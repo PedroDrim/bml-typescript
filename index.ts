@@ -23,30 +23,31 @@ export class Start {
      */
     public run(): void {
         // Validando tamanho de entradas
-        if (this._tamanho != -1) {
-            // Iniciando timer
-            const antes: number = new Date().getTime()
+        if (this._tamanho == -1) 
+            return
+        
+        // Iniciando timer
+        const antes: number = new Date().getTime()
 
-            let list: UserInfo[] = []
+        let list: UserInfo[] = []
 
-            // Criando UserInfo
-            for (let index: number = 0; index < this._tamanho; index++) {
-                const user: string = "user" + index
-                const password: string = "password" + index
-                list.push(new UserInfo(user, password))
-            }
-
-            // Calculando benchmark
-            const time: number = new Date().getTime() - antes
-
-            // Escrevendo Json
-            let response: string = "[OK]Tamanho: " + this._tamanho + "\n"
-            response += "[OK]Tempo: " + time + " ms"
-            
-            console.log("[START] Typescript_" + this._tamanho)
-            console.log(response)
-            console.log("[END] Typescript_" + this._tamanho)
+        // Criando UserInfo
+        for (let index: number = 0; index < this._tamanho; index++) {
+            const user: string = "user" + index
+            const password: string = "password" + index
+            list.push(new UserInfo(user, password))
         }
+
+        // Calculando benchmark
+        const time: number = new Date().getTime() - antes
+
+        // Escrevendo Json
+        let response: string = "[OK]Tamanho: " + this._tamanho + "\n"
+        response += "[OK]Tempo: " + time + " ms"
+        
+        console.log("[START] Typescript_" + this._tamanho)
+        console.log(response)
+        console.log("[END] Typescript_" + this._tamanho)
     }
 
     /**
