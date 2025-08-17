@@ -72,7 +72,7 @@ export class TableReader implements DataReader {
             const file: BunFile = Bun.file(fileName)
             const fullFile: string = await file.text()
             const lines: string[] = fullFile.replaceAll("\"", "").split("\n").slice(1)
-            list = lines.filter((line: string) => line != "").map(this.convertLine)
+            list = lines.filter((line: string) => line != "").map(this._convertLine)
         } catch (e) {
             throw new DataReaderException("Erro ao ler arquivo:" + fileName)
         }
@@ -85,7 +85,7 @@ export class TableReader implements DataReader {
      * @param line Linha a ser desserializada
      * @return Objeto 'UserInfo'
      */
-    private convertLine(line: String): UserInfo {
+    private _convertLine(line: String): UserInfo {
         const values: string[] = line.split(",")
 
         let user: string = values[0].trim()
