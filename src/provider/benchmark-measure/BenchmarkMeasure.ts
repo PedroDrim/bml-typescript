@@ -12,12 +12,12 @@ export class BenchmarkMeasure implements BenchmarkOutput {
     /**
      * Marca de inicio de estado
      */
-    private START_MARK: string = "_S"
+    private _START_MARK: string = "_S"
 
     /**
      * Marca de fim de estado
      */
-    private END_MARK: string = "_E"
+    private _END_MARK: string = "_E"
 
     /**
      * Mapa de estados
@@ -30,7 +30,7 @@ export class BenchmarkMeasure implements BenchmarkOutput {
      */
     public start(tag: string): void {
         let time: number = new Date().getTime()
-        this._benchMap.set(tag + this.START_MARK, time)
+        this._benchMap.set(tag + this._START_MARK, time)
     }
 
     /**
@@ -39,7 +39,7 @@ export class BenchmarkMeasure implements BenchmarkOutput {
      */
     public end(tag: string): void {
         let time: number = new Date().getTime()
-        this._benchMap.set(tag + this.END_MARK, time)
+        this._benchMap.set(tag + this._END_MARK, time)
     }
 
     /**
@@ -49,13 +49,13 @@ export class BenchmarkMeasure implements BenchmarkOutput {
      * @return Tempo decorrido entre o inicio e o fim da captura de estado
      */
     public resultByTag(tag: string, format: TimeFormat): number {
-        let startTag: boolean = this._benchMap.has(tag + this.START_MARK)
-        let endTag: boolean = this._benchMap.has(tag + this.END_MARK)
+        let startTag: boolean = this._benchMap.has(tag + this._START_MARK)
+        let endTag: boolean = this._benchMap.has(tag + this._END_MARK)
 
         if (!startTag || !endTag) throw new BenchmarkException("Não encontrado par 'inicio-fim' de:" + tag)
 
-        let start: number = this._benchMap.get(tag + this.START_MARK)!
-        let end: number = this._benchMap.get(tag + this.END_MARK)!
+        let start: number = this._benchMap.get(tag + this._START_MARK)!
+        let end: number = this._benchMap.get(tag + this._END_MARK)!
         return (end - start) * format
     }
 

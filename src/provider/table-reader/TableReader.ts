@@ -18,7 +18,7 @@ export class TableReader implements DataReader {
     /**
      * Lista contendo os dados
      */
-    private userInfoList: UserInfo[]
+    private _userInfoList: UserInfo[]
 
     /**
      * Construtor publico da classe
@@ -27,14 +27,14 @@ export class TableReader implements DataReader {
      */
     constructor(fileName: string) {
         this.fileName = fileName
-        this.userInfoList = []
+        this._userInfoList = []
     }
 
     /**
      * Abre o arquivo de dados
      */
     public async open(): Promise<void> {
-        this.userInfoList = await this._deserializeFile(this.fileName)
+        this._userInfoList = await this._deserializeFile(this.fileName)
     }
 
     /**
@@ -42,7 +42,7 @@ export class TableReader implements DataReader {
      * @returns Lista de usuarios
      */
     public readAll(): UserInfo[] {
-        return this.userInfoList
+        return this._userInfoList
     }
 
     /**
@@ -56,7 +56,7 @@ export class TableReader implements DataReader {
         if (endIndex < 0) throw new InvalidParameterException("'endIndex' é menor que 0")
         if (startIndex >= endIndex) throw new InvalidParameterException("'startIndex' é maior ou igual á 'endIndex'")
 
-        return this.userInfoList.slice(startIndex, endIndex)
+        return this._userInfoList.slice(startIndex, endIndex)
     }
 
     /**
